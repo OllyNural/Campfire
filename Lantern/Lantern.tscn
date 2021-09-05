@@ -1,0 +1,429 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://Lantern/Lantern.png" type="Texture" id=1]
+[ext_resource path="res://Lantern/LightSprite.png" type="Texture" id=2]
+[ext_resource path="res://Lantern/Lantern.gd" type="Script" id=3]
+[ext_resource path="res://Lantern/shader-8.png" type="Texture" id=4]
+[ext_resource path="res://Lantern/shader-1.png" type="Texture" id=5]
+[ext_resource path="res://Lantern/Light2D.gd" type="Script" id=6]
+[ext_resource path="res://Light/LightController.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "FloorAngledOn"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 45.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, -0.5 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "IdleOff"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "JumpOnDown"
+length = 0.15
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "JumpOnInvert"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "JumpOnLand"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "JumpOnUp"
+length = 0.15
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "RunOn"
+length = 0.9
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ), Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "FloorAngledOn"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "IdleOn"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "JumpOnDown"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "JumpOnInvert"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "JumpOnLand"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "JumpOnUp"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "RunOn"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=18]
+states/FloorAngledOn/node = SubResource( 8 )
+states/FloorAngledOn/position = Vector2( 98, 221.75 )
+states/Idle/node = SubResource( 10 )
+states/Idle/position = Vector2( 320.562, 221.375 )
+states/JumpOnDown/node = SubResource( 25 )
+states/JumpOnDown/position = Vector2( 164.765, 481.575 )
+states/JumpOnInvert/node = SubResource( 26 )
+states/JumpOnInvert/position = Vector2( 165.64, 410.575 )
+states/JumpOnLand/node = SubResource( 27 )
+states/JumpOnLand/position = Vector2( 270.14, 584.575 )
+states/JumpOnUp/node = SubResource( 28 )
+states/JumpOnUp/position = Vector2( 175.14, 337.075 )
+states/Run/node = SubResource( 11 )
+states/Run/position = Vector2( 536, 221.875 )
+transitions = [ "Idle", "Run", SubResource( 12 ), "Run", "Idle", SubResource( 13 ), "FloorAngledOn", "Idle", SubResource( 16 ), "Idle", "FloorAngledOn", SubResource( 17 ), "Idle", "JumpOnUp", SubResource( 29 ), "Run", "JumpOnUp", SubResource( 30 ), "JumpOnUp", "JumpOnInvert", SubResource( 31 ), "JumpOnInvert", "JumpOnDown", SubResource( 32 ), "JumpOnDown", "JumpOnLand", SubResource( 33 ), "JumpOnLand", "Idle", SubResource( 34 ) ]
+start_node = "Idle"
+graph_offset = Vector2( 47.6399, 196.882 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+
+[sub_resource type="CircleShape2D" id=20]
+
+[node name="Lantern" type="KinematicBody2D"]
+collision_layer = 64
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, 0 )
+texture = ExtResource( 1 )
+hframes = 2
+
+[node name="Light2D" type="Light2D" parent="Sprite"]
+visible = false
+position = Vector2( -0.277855, -4.12226 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+color = Color( 0.933333, 0.87451, 0.811765, 1 )
+range_layer_min = -10
+range_layer_max = 10
+shadow_enabled = true
+shadow_gradient_length = 0.3
+shadow_filter = 5
+shadow_filter_smooth = 16.0
+script = ExtResource( 6 )
+
+[node name="Light2DMask" type="Light2D" parent="Sprite"]
+visible = false
+position = Vector2( -0.277855, -4.12226 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+color = Color( 0.960784, 0.960784, 0.882353, 1 )
+mode = 3
+range_layer_min = -1
+range_layer_max = 1
+range_item_cull_mask = 3
+shadow_enabled = true
+
+[node name="Light2DBiggerMask" type="Light2D" parent="Sprite"]
+visible = false
+modulate = Color( 0, 0, 0, 0 )
+self_modulate = Color( 0, 0, 0, 0 )
+use_parent_material = true
+position = Vector2( -0.277855, -4.12226 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+energy = 0.5
+mode = 3
+range_item_cull_mask = 2
+shadow_enabled = true
+
+[node name="MovementPlayer" type="AnimationPlayer" parent="."]
+anims/FloorAngledOn = SubResource( 1 )
+anims/IdleOff = SubResource( 2 )
+anims/IdleOn = SubResource( 3 )
+anims/JumpOnDown = SubResource( 23 )
+anims/JumpOnInvert = SubResource( 22 )
+anims/JumpOnLand = SubResource( 24 )
+anims/JumpOnUp = SubResource( 21 )
+anims/RunOn = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 18 )
+anim_player = NodePath("../MovementPlayer")
+active = true
+parameters/playback = SubResource( 19 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="PickUpRange" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 20 )
+
+[node name="LightController" parent="." instance=ExtResource( 7 )]
