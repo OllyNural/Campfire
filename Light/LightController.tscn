@@ -1,129 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Light/LightController.gd" type="Script" id=1]
 [ext_resource path="res://Light/Area2D.gd" type="Script" id=2]
 [ext_resource path="res://Lantern/light-shader-online-1.png" type="Texture" id=3]
-[ext_resource path="res://Lantern/Light2DBigger.gd" type="Script" id=4]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Default"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("Light2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.2, 0.2 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Light2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.8, 0.8 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("LightSourceRange/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "FadeIn"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("Light2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 4, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0.2, 0.2 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Light2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 4, 1 ),
-"update": 0,
-"values": [ 0.0, 0.8 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("LightSourceRange/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "FadeOut"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("Light2D:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.4, 1 ),
-"update": 0,
-"values": [ Vector2( 0.2, 0.2 ), Vector2( 1e-05, 1e-05 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Light2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.4, 1 ),
-"update": 0,
-"values": [ 0.8, 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("LightSourceRange/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
+[ext_resource path="res://Lantern/Light2D.gd" type="Script" id=4]
+[ext_resource path="res://Lantern/shader-1.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=4]
 
@@ -131,26 +12,25 @@ tracks/2/keys = {
 script = ExtResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( -0.0731621, -1.82903 )
-rotation = 0.785398
-scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
+texture_scale = 0.2
 color = Color( 0.92549, 0.807843, 0.639216, 1 )
-energy = 0.8
+energy = 0.158025
 shadow_enabled = true
-shadow_gradient_length = 3.0
+shadow_gradient_length = 30.0
 shadow_filter = 5
-shadow_filter_smooth = 7.0
+shadow_filter_smooth = 18.3
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": "
  "
 }
 
-[node name="BrightnessPlayer" type="AnimationPlayer" parent="."]
-anims/Default = SubResource( 1 )
-anims/FadeIn = SubResource( 2 )
-anims/FadeOut = SubResource( 3 )
+[node name="Tween" type="Tween" parent="Light2D"]
+
+[node name="Light2D2" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 5 )
 
 [node name="LightSourceRange" type="Area2D" parent="." groups=[
 "LightSources",

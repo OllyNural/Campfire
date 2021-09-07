@@ -7,9 +7,6 @@ func is_colliding():
 	var areas = get_overlapping_areas()
 	return areas.size() > 0
 
-func _ready():
-	pass;
-
 func _on_LightSourceRange_area_entered(_area):
 	emit_signal("in_light_range")
 

@@ -11,7 +11,7 @@ func _ready():
 	noise.period = 16
 
 func set_texture_scale(scale):
-	light_scale = scale
+#	light_scale = scale
 	self.texture_scale = scale
 	
 func set_light_intensity(intensity):
@@ -25,5 +25,5 @@ func _process(_elta):
 	var alpha = ((noise_value + 1) / 4.0) + 0.5
 
 	self.color = Color(color.r, color.g, color.b, alpha)
-	
+
 	self.texture_scale = light_scale + (noise_value / 12)

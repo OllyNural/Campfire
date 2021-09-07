@@ -1,0 +1,154 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://UI/Roboto_Mono-24.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/Roboto_Mono-12.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/GameStartScreen.gd" type="Script" id=3]
+[ext_resource path="res://UI/GameScreenDimmer.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="GameStartScreen" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 3 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_right = 320.0
+margin_bottom = 180.0
+custom_constants/margin_right = 12
+custom_constants/margin_top = 32
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_left = 12.0
+margin_top = 32.0
+margin_right = 308.0
+margin_bottom = 168.0
+custom_constants/separation = 20
+
+[node name="GameOver" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+margin_right = 296.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 1 )
+text = "Campfire"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows"]
+margin_top = 53.0
+margin_right = 296.0
+margin_bottom = 115.0
+custom_constants/separation = 10
+
+[node name="NewGameButton" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
+margin_right = 296.0
+margin_bottom = 14.0
+focus_neighbour_bottom = NodePath("../MenuButton")
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = ExtResource( 2 )
+text = "New Game"
+align = 0
+
+[node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
+margin_top = 24.0
+margin_right = 296.0
+margin_bottom = 38.0
+focus_neighbour_top = NodePath("../RestartButton")
+focus_neighbour_bottom = NodePath("../QuitButton")
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = ExtResource( 2 )
+disabled = true
+text = "Continue"
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
+margin_top = 48.0
+margin_right = 296.0
+margin_bottom = 62.0
+focus_neighbour_top = NodePath("../MenuButton")
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+custom_fonts/font = ExtResource( 2 )
+text = "Quit"
+align = 0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+script = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="CanvasModulate"]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

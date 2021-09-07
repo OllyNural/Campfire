@@ -9,9 +9,14 @@ onready var lightController = $LightController
 var is_lit = true
 
 func _ready():
+	print('lantern lightController ready')
 	animationTree.active = true
 	animationState.travel("FloorAngledOn")
-	lightController.play("Default")
+	lightController.set_texture_scale(1)
+	lightController.set_light_intensity(0.8)
+	lightController.set_flicker_amount(1)
+	lightController.set_collision_range(5)
+	lightController.fade_in(0.1)
 
 func move(flip: bool):
 	animationState.travel("Run")
@@ -21,7 +26,7 @@ func idle(flip: bool):
 	animationState.travel("Idle")
 	flip(flip)
 
-func jump(jump_state: String, flip: bool):	
+func jump(jump_state: String, flip: bool):
 	flip(flip)
 	match jump_state:
 		"JumpUp":
@@ -43,20 +48,20 @@ func flip(flip: bool):
 		sprite.global_position = global_position - Vector2(5, 0)
 	else:
 		sprite.global_position = global_position - Vector2(-5, 0)
-	
+
 	sprite.flip_h = flip
 	
 func toggle_state():
 	if (is_lit):
-		lightController.play("FadeOut")
+		lightController.fade_out(0.2)
 	else:
-		lightController.play("FadeIn")
+		lightController.fade_in(0.2)
 	is_lit = !is_lit
 
-func fade_in():
+func turn_on():
 	is_lit = true
-	lightController.play("FadeIn")
+	lightController.fade_in(0.2)
 
-func fade_out():
+func turn_off():
 	is_lit = false
-	lightController.play("FadeOut")
+	lightController.fade_out(0.2)

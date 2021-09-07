@@ -10,7 +10,7 @@ export var MAX_SPEED: int = 32
 export var FRICTION: float = 0.2
 export var AIR_RESISTANCE: float = 0.02
 export var GRAVITY: int = 200
-export var JUMP_FORCE: int = 90
+export var JUMP_FORCE: float = 90.0
 
 var invert_velocity = (JUMP_FORCE / 10)
 
@@ -71,6 +71,7 @@ func jump_state(delta):
 		flip = velocity.x < 0
 
 	velocity.y += GRAVITY * delta
+
 
 	if (Input.is_action_just_pressed("ui_up")):
 		jump_pressed_current = jump_pressed_remember_time
@@ -177,7 +178,7 @@ func _on_lantern_toggle_state():
 
 func _on_cold_timeout_game_over():
 	emit_signal("cold_timeout_game_over")
-	lantern.fade_out()
+	lantern.turn_off()
 	for i in get_tree().get_nodes_in_group("LightSourceInstance"):
 		i.turn_off()
 
