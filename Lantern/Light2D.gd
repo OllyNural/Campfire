@@ -28,12 +28,12 @@ func set_flicker_amount(amount):
 	flicker_amount = amount
 
 func fade_in(time):
-	Tween.interpolate_property(self, "energy", 0, base_energy, time, 0, Tween.EASE_IN)
+	Tween.interpolate_property(self, "energy", self.energy, base_energy, time, 0, Tween.EASE_IN)
 	Tween.start()
 	yield(Tween, "tween_all_completed")
 
 func fade_out(time):
-	Tween.interpolate_property(self, "energy", base_energy, 0, time, 0, Tween.EASE_OUT)
+	Tween.interpolate_property(self, "energy", self.energy, 0, time, 0, Tween.EASE_OUT)
 	Tween.start()
 	yield(Tween, "tween_all_completed")
 

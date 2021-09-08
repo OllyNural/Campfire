@@ -14,7 +14,6 @@ func _on_QuitButton_pressed():
 
 func _on_ContinueButton_pressed():
 	set_buttons_disabled()
-	pass # Replace with function body.
 
 func _on_NewGameButton_pressed():
 	set_buttons_disabled()
@@ -22,7 +21,7 @@ func _on_NewGameButton_pressed():
 
 func fade_out():
 	yield(CanvasModulate.fade_out(0.5), "completed")
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(1.5), "timeout")
 	self.queue_free()
 
 func set_buttons_disabled():

@@ -17,23 +17,23 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_lampost_toggle") && isPlayerInRange:
 		toggle_state()
 
-func toggle_state():
+func toggle_state(time: float = 0.2):
 	if (is_lampost_on):
 		is_lampost_on = false
-		turn_off()
+		turn_off(time)
 	else:
 		is_lampost_on = true
-		turn_on()
+		turn_on(time)
 
-func turn_on():
+func turn_on(time: float = 0.2):
 	is_lampost_on = true
 	animationPlayer.play("On")
-	lightController.fade_in(0.2)
+	lightController.fade_in(time)
 
-func turn_off():
+func turn_off(time: float = 0.2):
 	is_lampost_on = false
 	animationPlayer.play("Off")
-	lightController.fade_out(0.2)
+	lightController.fade_out(time)
 
 func _on_Area2D_area_entered(_area):
 	isPlayerInRange = true

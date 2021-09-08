@@ -7,6 +7,7 @@ onready var AmbientLighting = $AmbientLighting
 var game_start
 
 func _ready():
+	get_tree().paused = false
 	add_start_screen()
 
 func add_start_screen():
@@ -16,7 +17,7 @@ func add_start_screen():
 
 func _on_game_start():
 	for i in get_tree().get_nodes_in_group("LightSourceInstance"):
-		i.turn_off()
+		i.turn_off(1)
 	
 	game_start.fade_out()
 	yield(get_tree().create_timer(1.5), "timeout")

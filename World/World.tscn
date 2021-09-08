@@ -3,7 +3,7 @@
 [ext_resource path="res://Player/PlayerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/Lampost/Lampost.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Particles2D.gd" type="Script" id=4]
+[ext_resource path="res://World/Environment/Snow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Stars.png" type="Texture" id=5]
 [ext_resource path="res://World/Tileset.png" type="Texture" id=6]
 [ext_resource path="res://World/Background.png" type="Texture" id=7]
@@ -840,23 +840,22 @@ script = ExtResource( 24 )
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="CanvasItemMaterial" id=152]
+resource_local_to_scene = true
+
 [sub_resource type="CanvasItemMaterial" id=82]
+resource_local_to_scene = true
 
-[sub_resource type="CanvasItemMaterial" id=83]
-particles_animation = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Curve" id=84]
+[sub_resource type="Curve" id=149]
 min_value = -30.0
 max_value = 30.0
 _data = [ Vector2( 0.0262346, 0.457401 ), 0.0, 0.0, 0, 0, Vector2( 0.0611621, 8.90671 ), 0.0, 0.0, 0, 0, Vector2( 0.122324, -0.552746 ), 115.276, 115.276, 0, 0, Vector2( 0.211009, 16.204 ), 284.348, 284.348, 0, 0, Vector2( 0.282875, -21.3636 ), -773.31, -773.31, 0, 0, Vector2( 0.38685, 29.177 ), 205.038, 205.038, 0, 0, Vector2( 0.463303, -0.282478 ), -67.9834, -67.9834, 0, 0, Vector2( 0.565749, -28.9311 ), 429.267, 429.267, 0, 0, Vector2( 0.643731, 29.4473 ), 594.544, 594.544, 0, 0, Vector2( 0.730887, -4.87707 ), 0.0, 0.0, 0, 0, Vector2( 0.796636, 9.71752 ), 0.0, 0.0, 0, 0, Vector2( 0.912844, -17.0392 ), 0.0, 0.0, 0, 0, Vector2( 0.98471, 0.258064 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=85]
-curve = SubResource( 84 )
+[sub_resource type="CurveTexture" id=150]
+curve = SubResource( 149 )
 
-[sub_resource type="ParticlesMaterial" id=86]
+[sub_resource type="ParticlesMaterial" id=151]
+resource_local_to_scene = true
 emission_shape = 2
 emission_box_extents = Vector3( 300, 1, 1 )
 flag_disable_z = true
@@ -867,7 +866,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 30.0
 linear_accel_random = 1.0
-tangential_accel_curve = SubResource( 85 )
+tangential_accel_curve = SubResource( 150 )
 scale_random = 1.0
 
 [node name="World" type="Node2D"]
@@ -971,6 +970,7 @@ format = 1
 tile_data = PoolIntArray( 5, 0, 1, 65570, 0, 0, 131074, 0, 0, 131088, 0, 1, 196619, 0, 0, 196632, 0, 1, 196635, 0, 1, 262152, 0, 0, 262180, 0, 1, 327682, 0, 1, 327695, 0, 0, 327701, 0, 1, 393235, 0, 0, 393248, 0, 0, 458757, 0, 0, 458761, 0, 1, 458781, 0, 0, 524301, 0, 0, 524315, 0, 0, 655361, 0, 0, 655368, 0, 0, 655376, 0, 0, 655381, 0, 0, 655396, 0, 1, 786443, 0, 0, 786460, 0, 0, 786465, 0, 0, 852002, 0, 0, 917524, 0, 1, 983053, 0, 1, 1048593, 0, 1, 1048601, 0, 0 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
+pause_mode = 2
 position = Vector2( 130, 143 )
 
 [node name="TopLeft" parent="Camera2D/Limits" index="0"]
@@ -980,6 +980,7 @@ position = Vector2( -499.215, -367.375 )
 position = Vector2( 546.647, 365.169 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Camera2D"]
+material = SubResource( 152 )
 position = Vector2( 0, -150 )
 remote_path = NodePath("../../Environment/Snow")
 update_rotation = false
@@ -991,18 +992,9 @@ script = ExtResource( 9 )
 light_scale = 2
 direction_left = false
 
-[node name="Snow" type="Particles2D" parent="Environment"]
-material = SubResource( 83 )
+[node name="Snow" parent="Environment" instance=ExtResource( 4 )]
 position = Vector2( 130, -7 )
-amount = 650
-lifetime = 10.0
-preprocess = 5.0
-explosiveness = 0.05
-randomness = 1.0
-visibility_rect = Rect2( 0, 0, 350, 300 )
-local_coords = false
-process_material = SubResource( 86 )
-script = ExtResource( 4 )
+process_material = SubResource( 151 )
 
 [editable path="YSort/PlayerContainer"]
 [editable path="YSort/PlayerContainer/Lantern"]

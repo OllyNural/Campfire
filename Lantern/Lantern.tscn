@@ -4,7 +4,7 @@
 [ext_resource path="res://Lantern/Lantern.gd" type="Script" id=3]
 [ext_resource path="res://Light/LightController.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=53]
 resource_name = "FloorAngledOn"
 length = 1.6
 loop = true
@@ -45,7 +45,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0.5, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=54]
 resource_name = "IdleOff"
 length = 1.6
 tracks/0/type = "value"
@@ -73,7 +73,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=55]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -125,7 +125,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=56]
 resource_name = "JumpOnDown"
 length = 0.15
 loop = true
@@ -155,7 +155,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=57]
 resource_name = "JumpOnInvert"
 length = 0.2
 tracks/0/type = "value"
@@ -183,7 +183,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=58]
 resource_name = "JumpOnLand"
 length = 0.2
 tracks/0/type = "value"
@@ -211,7 +211,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=59]
 resource_name = "JumpOnUp"
 length = 0.15
 loop = true
@@ -241,7 +241,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=60]
 resource_name = "RunOn"
 length = 0.9
 loop = true
@@ -354,6 +354,7 @@ graph_offset = Vector2( 47.6399, 196.882 )
 [node name="Lantern" type="KinematicBody2D" groups=[
 "LightSourceInstance",
 ]]
+pause_mode = 2
 collision_layer = 64
 script = ExtResource( 3 )
 
@@ -363,14 +364,14 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="MovementPlayer" type="AnimationPlayer" parent="."]
-anims/FloorAngledOn = SubResource( 35 )
-anims/IdleOff = SubResource( 36 )
-anims/IdleOn = SubResource( 37 )
-anims/JumpOnDown = SubResource( 38 )
-anims/JumpOnInvert = SubResource( 39 )
-anims/JumpOnLand = SubResource( 40 )
-anims/JumpOnUp = SubResource( 41 )
-anims/RunOn = SubResource( 42 )
+anims/FloorAngledOn = SubResource( 53 )
+anims/IdleOff = SubResource( 54 )
+anims/IdleOn = SubResource( 55 )
+anims/JumpOnDown = SubResource( 56 )
+anims/JumpOnInvert = SubResource( 57 )
+anims/JumpOnLand = SubResource( 58 )
+anims/JumpOnUp = SubResource( 59 )
+anims/RunOn = SubResource( 60 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 50 )

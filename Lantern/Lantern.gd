@@ -51,17 +51,19 @@ func flip(flip: bool):
 
 	sprite.flip_h = flip
 	
-func toggle_state():
+func toggle_state(time: float = 0.2):
 	if (is_lit):
-		lightController.fade_out(0.2)
+		turn_off(time)
 	else:
-		lightController.fade_in(0.2)
+		turn_on(time)
 	is_lit = !is_lit
 
-func turn_on():
+func turn_on(time: float = 0.2):
+	if (!is_lit):
+		lightController.fade_in(time)
 	is_lit = true
-	lightController.fade_in(0.2)
 
-func turn_off():
+func turn_off(time: float = 0.2):
+	if (is_lit):
+		lightController.fade_out(time)
 	is_lit = false
-	lightController.fade_out(0.2)

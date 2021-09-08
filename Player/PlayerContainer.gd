@@ -178,9 +178,7 @@ func _on_lantern_toggle_state():
 
 func _on_cold_timeout_game_over():
 	emit_signal("cold_timeout_game_over")
-	lantern.turn_off()
-	for i in get_tree().get_nodes_in_group("LightSourceInstance"):
-		i.turn_off()
+#	lantern.turn_off()
+#	for i in get_tree().get_nodes_in_group("LightSourceInstance"):
+#		i.turn_off(1.5)
 
-#func game_over():
-#	state = STOPPED
