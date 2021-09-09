@@ -1,7 +1,8 @@
 extends Node2D
 
 onready var LightRangeDetector = $LightRangeDetector
-onready var textureProgress = $CanvasLayer/TextureProgress
+onready var coldBar = $ColdBar
+onready var textureProgress = $ColdBar/TextureProgress
 
 var is_light_range = false
 
@@ -12,6 +13,8 @@ enum {
 	INCREASE,
 	STOPPED
 }
+
+var can_move = true setget set_can_move
 
 var state = STATIC
 var current_bar_value: float = 100
@@ -29,6 +32,14 @@ func _ready():
 	textureProgress.value = current_bar_value
 
 func _process(delta):
+	if (!can_move):
+		coldBar.get_child(0).hide()
+		coldBar.get_child(1).hide()
+		return
+	else:
+		coldBar.get_child(0).show()
+		coldBar.get_child(1).show()
+
 	match state:
 		STATIC:
 			pass
@@ -57,3 +68,6 @@ func _on_out_any_light_range():
 #	print('LightController :: OUT')
 	state = DECREASE
 	is_light_range = false
+
+func set_can_move(move: bool):
+	can_move = move

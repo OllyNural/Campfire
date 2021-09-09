@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var can_move = true setget set_can_move
+
 signal lantern_picked_up
 signal lantern_toggle_state
 signal cold_timeout_game_over
@@ -34,3 +36,11 @@ func _on_lantern_toggle_state():
 
 func _on_cold_timeout_game_over():
 	emit_signal("cold_timeout_game_over")
+
+func play(animation: String):
+	playerBody.play(animation)
+
+func set_can_move(move: bool):
+	can_move = move
+	scaredController.set_can_move(move)
+	

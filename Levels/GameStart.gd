@@ -3,12 +3,14 @@ extends Node2D
 const GameStartScreen = preload("res://UI/GameStartScreen.tscn")
 
 onready var AmbientLighting = $AmbientLighting
+onready var playerContainer = $PlayerContainer
 
 var game_start
 
 func _ready():
 	get_tree().paused = false
 	add_start_screen()
+	playerContainer.set_can_move(false)
 
 func add_start_screen():
 	game_start = GameStartScreen.instance()

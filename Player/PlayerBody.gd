@@ -22,3 +22,7 @@ func animate_jump(jump_state: String, lantern_picked_up: bool, is_moving: bool):
 func flip_h(flip: bool):
 	player_torso.flip_h(flip)
 	player_hand.flip_h(flip)
+
+func play(animation: String):
+	player_torso.play(animation)
+	player_hand.play(animation)

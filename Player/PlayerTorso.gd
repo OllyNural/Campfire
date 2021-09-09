@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var sprite = $Sprite
@@ -27,3 +28,6 @@ func animate_jump(jump_state, is_moving) -> void:
 
 func flip_h(flip: bool):
 	sprite.flip_h = flip
+
+func play(animation: String):
+	animationPlayer.play(animation)

@@ -4,7 +4,7 @@
 [ext_resource path="res://Lantern/Lantern.gd" type="Script" id=3]
 [ext_resource path="res://Light/LightController.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id=1]
 resource_name = "FloorAngledOn"
 length = 1.6
 loop = true
@@ -45,7 +45,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0.5, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=54]
+[sub_resource type="Animation" id=2]
 resource_name = "IdleOff"
 length = 1.6
 tracks/0/type = "value"
@@ -73,7 +73,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=55]
+[sub_resource type="Animation" id=3]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -125,7 +125,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=56]
+[sub_resource type="Animation" id=4]
 resource_name = "JumpOnDown"
 length = 0.15
 loop = true
@@ -155,7 +155,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=57]
+[sub_resource type="Animation" id=5]
 resource_name = "JumpOnInvert"
 length = 0.2
 tracks/0/type = "value"
@@ -183,7 +183,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=58]
+[sub_resource type="Animation" id=6]
 resource_name = "JumpOnLand"
 length = 0.2
 tracks/0/type = "value"
@@ -211,7 +211,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=59]
+[sub_resource type="Animation" id=7]
 resource_name = "JumpOnUp"
 length = 0.15
 loop = true
@@ -241,7 +241,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=60]
+[sub_resource type="Animation" id=8]
 resource_name = "RunOn"
 length = 0.9
 loop = true
@@ -283,73 +283,73 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=43]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "FloorAngledOn"
 
-[sub_resource type="AnimationNodeAnimation" id=44]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "IdleOn"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "JumpOnDown"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "JumpOnInvert"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "JumpOnLand"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "JumpOnUp"
 
-[sub_resource type="AnimationNodeAnimation" id=45]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "RunOn"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=50]
-states/FloorAngledOn/node = SubResource( 43 )
+[sub_resource type="AnimationNodeStateMachine" id=26]
+states/FloorAngledOn/node = SubResource( 9 )
 states/FloorAngledOn/position = Vector2( 98, 221.75 )
-states/Idle/node = SubResource( 44 )
+states/Idle/node = SubResource( 10 )
 states/Idle/position = Vector2( 320.562, 221.375 )
-states/JumpOnDown/node = SubResource( 25 )
+states/JumpOnDown/node = SubResource( 11 )
 states/JumpOnDown/position = Vector2( 164.765, 481.575 )
-states/JumpOnInvert/node = SubResource( 26 )
+states/JumpOnInvert/node = SubResource( 12 )
 states/JumpOnInvert/position = Vector2( 165.64, 410.575 )
-states/JumpOnLand/node = SubResource( 27 )
+states/JumpOnLand/node = SubResource( 13 )
 states/JumpOnLand/position = Vector2( 270.14, 584.575 )
-states/JumpOnUp/node = SubResource( 28 )
+states/JumpOnUp/node = SubResource( 14 )
 states/JumpOnUp/position = Vector2( 175.14, 337.075 )
-states/Run/node = SubResource( 45 )
+states/Run/node = SubResource( 15 )
 states/Run/position = Vector2( 536, 221.875 )
-transitions = [ "Idle", "Run", SubResource( 46 ), "Run", "Idle", SubResource( 47 ), "FloorAngledOn", "Idle", SubResource( 48 ), "Idle", "FloorAngledOn", SubResource( 49 ), "Idle", "JumpOnUp", SubResource( 29 ), "Run", "JumpOnUp", SubResource( 30 ), "JumpOnUp", "JumpOnInvert", SubResource( 31 ), "JumpOnInvert", "JumpOnDown", SubResource( 32 ), "JumpOnDown", "JumpOnLand", SubResource( 33 ), "JumpOnLand", "Idle", SubResource( 34 ) ]
+transitions = [ "Idle", "Run", SubResource( 16 ), "Run", "Idle", SubResource( 17 ), "FloorAngledOn", "Idle", SubResource( 18 ), "Idle", "FloorAngledOn", SubResource( 19 ), "Idle", "JumpOnUp", SubResource( 20 ), "Run", "JumpOnUp", SubResource( 21 ), "JumpOnUp", "JumpOnInvert", SubResource( 22 ), "JumpOnInvert", "JumpOnDown", SubResource( 23 ), "JumpOnDown", "JumpOnLand", SubResource( 24 ), "JumpOnLand", "Idle", SubResource( 25 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 47.6399, 196.882 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=51]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
 
-[sub_resource type="CircleShape2D" id=52]
+[sub_resource type="CircleShape2D" id=28]
 
 [node name="Lantern" type="KinematicBody2D" groups=[
 "LightSourceInstance",
@@ -364,26 +364,26 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="MovementPlayer" type="AnimationPlayer" parent="."]
-anims/FloorAngledOn = SubResource( 53 )
-anims/IdleOff = SubResource( 54 )
-anims/IdleOn = SubResource( 55 )
-anims/JumpOnDown = SubResource( 56 )
-anims/JumpOnInvert = SubResource( 57 )
-anims/JumpOnLand = SubResource( 58 )
-anims/JumpOnUp = SubResource( 59 )
-anims/RunOn = SubResource( 60 )
+anims/FloorAngledOn = SubResource( 1 )
+anims/IdleOff = SubResource( 2 )
+anims/IdleOn = SubResource( 3 )
+anims/JumpOnDown = SubResource( 4 )
+anims/JumpOnInvert = SubResource( 5 )
+anims/JumpOnLand = SubResource( 6 )
+anims/JumpOnUp = SubResource( 7 )
+anims/RunOn = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 50 )
+tree_root = SubResource( 26 )
 anim_player = NodePath("../MovementPlayer")
 active = true
-parameters/playback = SubResource( 51 )
+parameters/playback = SubResource( 27 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 0
 
 [node name="PickUpRange" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 52 )
+shape = SubResource( 28 )
 
 [node name="LightController" parent="." instance=ExtResource( 7 )]

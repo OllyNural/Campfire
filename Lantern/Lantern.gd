@@ -17,6 +17,7 @@ func _ready():
 	lightController.set_flicker_amount(1)
 	lightController.set_collision_range(5)
 	lightController.fade_in(0.1)
+	is_lit = true
 
 func move(flip: bool):
 	animationState.travel("Run")
@@ -52,18 +53,21 @@ func flip(flip: bool):
 	sprite.flip_h = flip
 	
 func toggle_state(time: float = 0.2):
+	print('is_lit')
+	print(is_lit)
 	if (is_lit):
 		turn_off(time)
 	else:
 		turn_on(time)
-	is_lit = !is_lit
 
 func turn_on(time: float = 0.2):
+	print('turn_on')
 	if (!is_lit):
 		lightController.fade_in(time)
 	is_lit = true
 
 func turn_off(time: float = 0.2):
+	print('turn_off')
 	if (is_lit):
 		lightController.fade_out(time)
 	is_lit = false

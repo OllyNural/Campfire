@@ -17,22 +17,22 @@ func _ready():
 	noise.period = 16
 
 func set_texture_scale(scale: float):
-#	self.texture_scale = scale / 5
 	base_light_scale = scale / 5
 
 func set_light_intensity(energy):
-#	self.energy = energy
 	base_energy = energy
 
 func set_flicker_amount(amount):
 	flicker_amount = amount
 
 func fade_in(time):
+	print('fading in: ', self.energy, base_energy)
 	Tween.interpolate_property(self, "energy", self.energy, base_energy, time, 0, Tween.EASE_IN)
 	Tween.start()
 	yield(Tween, "tween_all_completed")
 
 func fade_out(time):
+	print('fading off: ', self.energy, 0)
 	Tween.interpolate_property(self, "energy", self.energy, 0, time, 0, Tween.EASE_OUT)
 	Tween.start()
 	yield(Tween, "tween_all_completed")

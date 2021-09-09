@@ -17,6 +17,7 @@ func _ready():
 	get_tree().paused = false
 	AmbientLighting.light_scale = AmbientLighting.LIGHT_SCALES.BLACK
 	PlayerContainer.connect("cold_timeout_game_over", self, "_on_player_loss")
+	PlayerContainer.startOpeningCutscene()
 
 func _process(delta):
 	if (!isGameOver):

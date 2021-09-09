@@ -12,6 +12,8 @@ export var AIR_RESISTANCE: float = 0.02
 export var GRAVITY: int = 200
 export var JUMP_FORCE: float = 90.0
 
+var can_move = true setget set_can_move
+
 var invert_velocity = (JUMP_FORCE / 10)
 
 const MAX_JUMP_FORGIVENESS_TIME = 0.08
@@ -42,6 +44,9 @@ func _ready():
 	player.connect("cold_timeout_game_over", self, "_on_cold_timeout_game_over")
 
 func _physics_process(delta):
+	if !can_move:
+		return
+
 	if Input.is_action_just_pressed("ui_drop") && lantern_picked_up && player.is_on_floor():
 		drop_lantern()
 		
@@ -54,6 +59,7 @@ func _physics_process(delta):
 #			player.move(lantern_picked_up, velocity.x < 0)
 	
 func jump_state(delta):
+#	print('in jump state')
 	input_x = get_direction().x
 	jump_pressed_current -= delta
 
@@ -83,6 +89,7 @@ func jump_state(delta):
 		velocity.y = -JUMP_FORCE
 
 	if player.is_on_floor():
+#		print('on floor')
 		if (is_in_air):
 			# Start Player land animation
 			is_in_air = false
@@ -92,10 +99,12 @@ func jump_state(delta):
 			state = MOVE
 
 #		jump_forgiveness_time = 0.0
+#		state = MOVE
 		if (input_x == 0):
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 
 	else:
+#		print('not on floor')
 		is_in_air = true
 
 		# Jump is going up
@@ -115,10 +124,8 @@ func jump_state(delta):
 	if (lantern_picked_up):
 		lantern.move_and_slide(velocity, FLOOR_NORMAL)
 
-func _on_crouch_animation_end():
-	state = MOVE
-	
 func move_state(delta):
+#	print('in move state')
 	input_x = get_direction().x
 
 	if (input_x != 0):
@@ -139,6 +146,7 @@ func move_state(delta):
 
 	# Jumping
 	if (player.is_on_floor() && jump_pressed_current > 0):
+		print('jumping')
 		state = JUMP
 
 	if ((jump_forgiveness_time <= MAX_JUMP_FORGIVENESS_TIME) && Input.is_action_just_pressed("ui_up")):
@@ -149,6 +157,9 @@ func move_state(delta):
 		if (input_x == 0):
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 	else:
+#		print(velocity)
+#		print(position)
+#		print('not on floor')
 		state = JUMP
 
 	velocity = player.move_and_slide(velocity, FLOOR_NORMAL)
@@ -178,7 +189,13 @@ func _on_lantern_toggle_state():
 
 func _on_cold_timeout_game_over():
 	emit_signal("cold_timeout_game_over")
-#	lantern.turn_off()
-#	for i in get_tree().get_nodes_in_group("LightSourceInstance"):
-#		i.turn_off(1.5)
 
+func startOpeningCutscene():
+	can_move = false
+#	Run Animation Player animation
+#	emit_signal("display_helper_controls")
+	can_move = true
+
+func set_can_move(move: bool):
+	can_move = move
+	player.set_can_move(move)
