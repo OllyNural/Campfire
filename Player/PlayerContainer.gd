@@ -10,7 +10,7 @@ export var MAX_SPEED: int = 32
 export var FRICTION: float = 0.2
 export var AIR_RESISTANCE: float = 0.02
 export var GRAVITY: int = 200
-export var JUMP_FORCE: float = 90.0
+export var JUMP_FORCE: float = 100.0
 
 var can_move = true setget set_can_move
 
@@ -146,7 +146,6 @@ func move_state(delta):
 
 	# Jumping
 	if (player.is_on_floor() && jump_pressed_current > 0):
-		print('jumping')
 		state = JUMP
 
 	if ((jump_forgiveness_time <= MAX_JUMP_FORGIVENESS_TIME) && Input.is_action_just_pressed("ui_up")):
@@ -157,9 +156,6 @@ func move_state(delta):
 		if (input_x == 0):
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 	else:
-#		print(velocity)
-#		print(position)
-#		print('not on floor')
 		state = JUMP
 
 	velocity = player.move_and_slide(velocity, FLOOR_NORMAL)
@@ -199,3 +195,4 @@ func startOpeningCutscene():
 func set_can_move(move: bool):
 	can_move = move
 	player.set_can_move(move)
+	lantern.set_can_move(move)

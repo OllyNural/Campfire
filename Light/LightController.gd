@@ -2,6 +2,10 @@ extends Node2D
 
 onready var light2D = $Light2D
 onready var collisionShape = $LightSourceRange/CollisionShape2D
+onready var lightSourceRange = $LightSourceRange
+
+func set_light_type(type):
+	lightSourceRange.set_light_type(type)
 
 func set_texture_scale(scale):
 	light2D.set_texture_scale(scale)

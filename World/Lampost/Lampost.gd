@@ -6,9 +6,15 @@ onready var lightController = $LightController
 var isPlayerInRange: bool = false
 var is_lampost_on: bool = false
 
+export var turn_on = true
+
 func _ready():
-	turn_on()
-	lightController.set_texture_scale(2)
+	lightController.set_light_type("lampost")
+	if (turn_on):
+		turn_on()
+	else:
+		turn_off()
+	lightController.set_texture_scale(1.5)
 	lightController.set_light_intensity(1)
 	lightController.set_flicker_amount(2)
 	lightController.set_collision_range(7)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=2]
+[gd_scene load_steps=152 format=2]
 
 [ext_resource path="res://Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://Player/PlayerTorso.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Player/ScaredController.gd" type="Script" id=9]
 [ext_resource path="res://UI/Healthbar-large-fill.png" type="Texture" id=10]
 [ext_resource path="res://UI/Healthbar-large-background.png" type="Texture" id=11]
+[ext_resource path="res://UI/Healthbar-large-icon.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -1004,11 +1005,11 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 135 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.514481, -4.42451 )
 shape = SubResource( 136 )
 
 [node name="ItemDetector" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 8 )
 
 [node name="PickupAreaBox" type="Area2D" parent="ItemDetector"]
@@ -1016,20 +1017,20 @@ collision_layer = 2
 collision_mask = 64
 
 [node name="PickupRange" type="CollisionShape2D" parent="ItemDetector/PickupAreaBox"]
+visible = false
 position = Vector2( 0, -6 )
 shape = SubResource( 137 )
 
 [node name="LampostArea2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 256
 
 [node name="PickupRange" type="CollisionShape2D" parent="LampostArea2D"]
+visible = false
 position = Vector2( 0, -6 )
 shape = SubResource( 137 )
 
 [node name="ScaredController" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 9 )
 
 [node name="LightRangeDetector" type="Area2D" parent="ScaredController"]
@@ -1038,16 +1039,17 @@ collision_mask = 128
 script = ExtResource( 6 )
 
 [node name="LightRangeCollision" type="CollisionShape2D" parent="ScaredController/LightRangeDetector"]
+visible = false
 position = Vector2( 0, -7 )
 shape = SubResource( 138 )
 
 [node name="ColdBar" type="CanvasLayer" parent="ScaredController"]
 
 [node name="TextureRect" type="TextureRect" parent="ScaredController/ColdBar"]
-margin_left = 96.0
-margin_top = 150.0
-margin_right = 224.0
-margin_bottom = 190.0
+margin_left = 30.0
+margin_top = 156.0
+margin_right = 158.0
+margin_bottom = 196.0
 texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1055,10 +1057,10 @@ __meta__ = {
 
 [node name="TextureProgress" type="TextureProgress" parent="ScaredController/ColdBar"]
 material = SubResource( 139 )
-margin_left = 110.841
-margin_top = 164.569
-margin_right = 238.841
-margin_bottom = 204.569
+margin_left = 32.0
+margin_top = 158.0
+margin_right = 160.0
+margin_bottom = 198.0
 step = 0.05
 value = 100.0
 texture_progress = ExtResource( 10 )
@@ -1067,6 +1069,14 @@ tint_progress = Color( 1, 1, 1, 0.686275 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="ScaredController/ColdBar"]
+position = Vector2( 20, 160 )
+texture = ExtResource( 12 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ScaredController/ColdBar"]
+visible = false
+color = Color( 1, 1, 1, 0.901961 )
 
 [connection signal="area_entered" from="ItemDetector/PickupAreaBox" to="ItemDetector" method="_on_PickupAreaBox_area_entered"]
 [connection signal="area_exited" from="ItemDetector/PickupAreaBox" to="ItemDetector" method="_on_PickupAreaBox_area_exited"]

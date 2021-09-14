@@ -35,10 +35,11 @@ func _process(delta):
 	if (!can_move):
 		coldBar.get_child(0).hide()
 		coldBar.get_child(1).hide()
-		return
+		coldBar.get_child(2).hide()
 	else:
 		coldBar.get_child(0).show()
 		coldBar.get_child(1).show()
+		coldBar.get_child(2).show()
 
 	match state:
 		STATIC:
@@ -60,12 +61,10 @@ func _process(delta):
 			pass
 
 func _on_in_any_light_range():
-#	print('LightController :: IN')
 	state = INCREASE
 	is_light_range = true
 
 func _on_out_any_light_range():
-#	print('LightController :: OUT')
 	state = DECREASE
 	is_light_range = false
 
