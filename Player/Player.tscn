@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=2]
+[gd_scene load_steps=151 format=2]
 
 [ext_resource path="res://Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://Player/PlayerTorso.gd" type="Script" id=2]
@@ -270,17 +270,9 @@ animation = "Run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
 switch_mode = 2
 auto_advance = true
 
@@ -292,8 +284,6 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=36]
 switch_mode = 2
 auto_advance = true
@@ -302,13 +292,9 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=42]
 
@@ -318,15 +304,21 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=45]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=141]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=142]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=143]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=144]
 
 [sub_resource type="AnimationNodeStateMachine" id=48]
 states/Idle/node = SubResource( 14 )
 states/Idle/position = Vector2( 254.5, -285.214 )
 states/JumpCrouch/node = SubResource( 15 )
-states/JumpCrouch/position = Vector2( -15.7748, -189.738 )
+states/JumpCrouch/position = Vector2( -15.2748, -188.824 )
 states/JumpMoveCrouch/node = SubResource( 16 )
 states/JumpMoveCrouch/position = Vector2( 693.141, -187.909 )
 states/JumpMoveDown/node = SubResource( 17 )
@@ -347,9 +339,9 @@ states/JumpStillUp/node = SubResource( 24 )
 states/JumpStillUp/position = Vector2( 41.7065, -67.3992 )
 states/Run/node = SubResource( 25 )
 states/Run/position = Vector2( 465.5, -286.849 )
-transitions = [ "Idle", "Run", SubResource( 26 ), "Run", "Idle", SubResource( 27 ), "JumpCrouch", "JumpStillUp", SubResource( 28 ), "JumpStillUp", "JumpStillInvert", SubResource( 29 ), "JumpStillInvert", "JumpStillDown", SubResource( 30 ), "JumpMoveCrouch", "JumpMoveUp", SubResource( 31 ), "JumpMoveUp", "JumpMoveInvert", SubResource( 32 ), "JumpMoveInvert", "JumpMoveDown", SubResource( 33 ), "JumpMoveDown", "JumpMoveLand", SubResource( 34 ), "JumpStillDown", "JumpStillLand", SubResource( 35 ), "JumpStillLand", "Idle", SubResource( 36 ), "JumpMoveLand", "Idle", SubResource( 37 ), "JumpStillDown", "JumpMoveDown", SubResource( 38 ), "JumpMoveDown", "JumpStillDown", SubResource( 39 ), "JumpMoveUp", "JumpStillUp", SubResource( 40 ), "JumpStillUp", "JumpMoveUp", SubResource( 41 ), "Idle", "JumpStillUp", SubResource( 42 ), "Run", "JumpStillUp", SubResource( 43 ), "Run", "JumpMoveUp", SubResource( 44 ), "Idle", "JumpMoveUp", SubResource( 45 ), "JumpStillInvert", "JumpMoveInvert", SubResource( 46 ), "JumpMoveInvert", "JumpStillInvert", SubResource( 47 ) ]
+transitions = [ "Idle", "Run", SubResource( 26 ), "Run", "Idle", SubResource( 27 ), "JumpStillUp", "JumpStillInvert", SubResource( 29 ), "JumpStillInvert", "JumpStillDown", SubResource( 30 ), "JumpMoveUp", "JumpMoveInvert", SubResource( 32 ), "JumpMoveInvert", "JumpMoveDown", SubResource( 33 ), "JumpMoveDown", "JumpMoveLand", SubResource( 34 ), "JumpStillLand", "Idle", SubResource( 36 ), "JumpMoveLand", "Idle", SubResource( 37 ), "JumpMoveDown", "JumpStillDown", SubResource( 39 ), "JumpMoveUp", "JumpStillUp", SubResource( 40 ), "Idle", "JumpStillUp", SubResource( 42 ), "Run", "JumpStillUp", SubResource( 43 ), "Run", "JumpMoveUp", SubResource( 44 ), "Idle", "JumpMoveUp", SubResource( 45 ), "JumpMoveInvert", "JumpStillInvert", SubResource( 47 ), "JumpStillDown", "JumpStillLand", SubResource( 141 ), "JumpStillUp", "JumpMoveUp", SubResource( 142 ), "JumpStillInvert", "JumpMoveInvert", SubResource( 143 ), "JumpStillDown", "JumpMoveDown", SubResource( 144 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 18.5148, 17.5252 )
+graph_offset = Vector2( -106.698, 4.48254 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=49]
 
@@ -929,6 +921,10 @@ height = 6.77405
 
 [sub_resource type="CanvasItemMaterial" id=139]
 
+[sub_resource type="CapsuleShape2D" id=140]
+radius = 4.0046
+height = 6.79874
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 3 )
@@ -943,7 +939,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -7 )
 hframes = 43
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerBody/PlayerTorso"]
 anims/Idle = SubResource( 1 )
@@ -1005,11 +1001,11 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 135 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0.514481, -4.42451 )
+position = Vector2( 0.0556425, -4.38988 )
 shape = SubResource( 136 )
 
 [node name="ItemDetector" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 8 )
 
 [node name="PickupAreaBox" type="Area2D" parent="ItemDetector"]
@@ -1017,11 +1013,11 @@ collision_layer = 2
 collision_mask = 64
 
 [node name="PickupRange" type="CollisionShape2D" parent="ItemDetector/PickupAreaBox"]
-visible = false
 position = Vector2( 0, -6 )
 shape = SubResource( 137 )
 
 [node name="LampostArea2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 256
 
@@ -1031,6 +1027,7 @@ position = Vector2( 0, -6 )
 shape = SubResource( 137 )
 
 [node name="ScaredController" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 9 )
 
 [node name="LightRangeDetector" type="Area2D" parent="ScaredController"]
@@ -1039,7 +1036,6 @@ collision_mask = 128
 script = ExtResource( 6 )
 
 [node name="LightRangeCollision" type="CollisionShape2D" parent="ScaredController/LightRangeDetector"]
-visible = false
 position = Vector2( 0, -7 )
 shape = SubResource( 138 )
 
@@ -1077,6 +1073,15 @@ texture = ExtResource( 12 )
 [node name="CanvasModulate" type="CanvasModulate" parent="ScaredController/ColdBar"]
 visible = false
 color = Color( 1, 1, 1, 0.901961 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.0188637, -6.97949 )
+shape = SubResource( 140 )
 
 [connection signal="area_entered" from="ItemDetector/PickupAreaBox" to="ItemDetector" method="_on_PickupAreaBox_area_entered"]
 [connection signal="area_exited" from="ItemDetector/PickupAreaBox" to="ItemDetector" method="_on_PickupAreaBox_area_exited"]

@@ -10,7 +10,7 @@ export var MAX_SPEED: int = 32
 export var FRICTION: float = 0.2
 export var AIR_RESISTANCE: float = 0.02
 export var GRAVITY: int = 200
-export var JUMP_FORCE: float = 100.0
+export var JUMP_FORCE: float = 90.0
 
 var can_move = true setget set_can_move
 
@@ -37,6 +37,7 @@ enum {
 var state = MOVE
 var velocity = Vector2.ZERO
 var input_x
+var prev_input = 0
 
 func _ready():
 	player.connect("lantern_picked_up", self, "_on_lantern_picked_up")
@@ -74,10 +75,9 @@ func jump_state(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0, AIR_RESISTANCE)
 		is_moving = false
-		flip = velocity.x < 0
+		flip = prev_input < 0
 
 	velocity.y += GRAVITY * delta
-
 
 	if (Input.is_action_just_pressed("ui_up")):
 		jump_pressed_current = jump_pressed_remember_time
@@ -87,10 +87,15 @@ func jump_state(delta):
 		if (lantern_picked_up):
 			lantern.jump("JumpUp", flip)
 		velocity.y = -JUMP_FORCE
+	
+	velocity = player.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
+	if (lantern_picked_up):
+		lantern.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
 
 	if player.is_on_floor():
-#		print('on floor')
+#		print('Jump - on floor: ', is_in_air)
 		if (is_in_air):
+#			print('running land animation')
 			# Start Player land animation
 			is_in_air = false
 			player.jump("Land", lantern_picked_up, flip, is_moving)
@@ -98,18 +103,20 @@ func jump_state(delta):
 				lantern.jump("Land", flip)
 			state = MOVE
 
-#		jump_forgiveness_time = 0.0
 #		state = MOVE
+
 		if (input_x == 0):
-			velocity.x = lerp(velocity.x, 0, FRICTION)
+			velocity.x = lerp(prev_input, 0, FRICTION)
 
 	else:
-#		print('not on floor')
 		is_in_air = true
+#		print('Jump - not on floor: ', is_in_air)
 
 		# Jump is going up
 		if (-JUMP_FORCE <= velocity.y && velocity.y < -invert_velocity):
 			player.jump("JumpUp", lantern_picked_up, flip, is_moving)
+			if (lantern_picked_up):
+				lantern.jump("JumpUp", flip)
 		if (-invert_velocity < velocity.y):
 			player.jump("JumpDown", lantern_picked_up, flip, is_moving)
 			if (lantern_picked_up):
@@ -119,27 +126,28 @@ func jump_state(delta):
 			jump_forgiveness_time = MAX_JUMP_FORGIVENESS_TIME + 1
 
 		jump_forgiveness_time += delta
-
-	velocity = player.move_and_slide(velocity, FLOOR_NORMAL)
-	if (lantern_picked_up):
-		lantern.move_and_slide(velocity, FLOOR_NORMAL)
+	
+	if (input_x):
+		prev_input = input_x
 
 func move_state(delta):
-#	print('in move state')
+#	print('move state')
 	input_x = get_direction().x
+	
+	var flip
 
 	if (input_x != 0):
 		velocity.x += input_x * ACCELERATION * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-		player.move(lantern_picked_up, input_x < 0)
+		flip = input_x < 0
+		player.move(lantern_picked_up, flip)
 		if (lantern_picked_up):
-			lantern.move(input_x < 0)
+			lantern.move(flip)
 	else:
+		flip = prev_input < 0
 		player.idle(lantern_picked_up)
 		if (lantern_picked_up):
-			lantern.idle(velocity.x < 0)
-	
-	velocity.y += GRAVITY * delta
+			lantern.idle(flip)
 	
 	if (Input.is_action_just_pressed("ui_up")):
 		jump_pressed_current = jump_pressed_remember_time
@@ -152,15 +160,23 @@ func move_state(delta):
 		state = JUMP
 
 	if player.is_on_floor():
+#		print('player on floor')
 		jump_forgiveness_time = 0.0
 		if (input_x == 0):
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 	else:
+#		print('player not on floor')
 		state = JUMP
+	
+#	print('Setting velocity using gravity and delta. velocity:', velocity.y, ', new velocity', (velocity.y + GRAVITY * delta))
+#	print('New state after changing: ', state)
+	velocity.y += GRAVITY * delta
 
-	velocity = player.move_and_slide(velocity, FLOOR_NORMAL)
+	velocity = player.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
 	if (lantern_picked_up):
-		lantern.move_and_slide(velocity, FLOOR_NORMAL)
+		lantern.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
+	
+	prev_input = input_x
 
 func get_direction() -> Vector2:
 	var input_vector = Vector2.ZERO
@@ -196,3 +212,4 @@ func set_can_move(move: bool):
 	can_move = move
 	player.set_can_move(move)
 	lantern.set_can_move(move)
+	

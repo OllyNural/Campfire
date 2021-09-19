@@ -5,6 +5,9 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var sprite = $Sprite
 
+#func _process(delta):
+#	print(animationState.get_current_node())
+
 func set_active(state: bool) -> void:
 	animationTree.active = state
 

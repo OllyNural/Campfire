@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -38, 146 )
+collision/safe_margin = 0.01
 
 [node name="Lantern" parent="." instance=ExtResource( 3 )]
 position = Vector2( -72, 145 )

@@ -20,7 +20,6 @@ func _ready():
 	lightController.set_flicker_amount(1)
 	lightController.set_collision_range(5)
 	lightController.set_light_type("lantern")
-	is_lit = true
 	turn_off(0.1)
 	fuelController.connect("lantern_fuel_not_empty", self, "_on_lantern_fuel_not_empty")
 	fuelController.connect("lantern_fuel_empty", self, "_on_lantern_fuel_empty")

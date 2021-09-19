@@ -10,21 +10,17 @@ var camera_position = Vector2(0, 0)
 
 var snow_map = {
 	SNOW_SCALES.LIGHT: {
-#		"pos": Vector2(0, -200),
-#		"pos": Vector2(160, -25),
 		"angle": 0,
 		"angular_velocity": 0,
 		"speed_scale": 1,
 		"amount": 1000,
 	},
 	SNOW_SCALES.MEDIUM: {
-#		"pos": Vector2(0, -100),
 		"angle": 0,
 		"speed_scale": 2,
 		"amount": 750,
 	},
 	SNOW_SCALES.STRONG: {
-#		"pos": Vector2(0, -0),
 		"angle": 0,
 		"speed_scale": 4,
 		"amount": 1000,

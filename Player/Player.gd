@@ -42,5 +42,4 @@ func play(animation: String):
 
 func set_can_move(move: bool):
 	can_move = move
-	scaredController.set_can_move(move)
-	
+	scaredController.set_can_move(false)
