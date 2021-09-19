@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Lantern/Lantern.png" type="Texture" id=1]
 [ext_resource path="res://UI/Fuelbar-large-background.png" type="Texture" id=2]
@@ -333,6 +333,10 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=26]
 states/FloorAngledOn/node = SubResource( 9 )
 states/FloorAngledOn/position = Vector2( 98, 221.75 )
@@ -348,9 +352,9 @@ states/JumpOnUp/node = SubResource( 14 )
 states/JumpOnUp/position = Vector2( 175.14, 337.075 )
 states/Run/node = SubResource( 15 )
 states/Run/position = Vector2( 536, 221.875 )
-transitions = [ "Idle", "Run", SubResource( 16 ), "Run", "Idle", SubResource( 17 ), "FloorAngledOn", "Idle", SubResource( 18 ), "Idle", "FloorAngledOn", SubResource( 19 ), "Idle", "JumpOnUp", SubResource( 20 ), "Run", "JumpOnUp", SubResource( 21 ), "JumpOnUp", "JumpOnInvert", SubResource( 22 ), "JumpOnInvert", "JumpOnDown", SubResource( 23 ), "JumpOnDown", "JumpOnLand", SubResource( 24 ), "JumpOnLand", "Idle", SubResource( 25 ) ]
+transitions = [ "Idle", "Run", SubResource( 16 ), "Run", "Idle", SubResource( 17 ), "FloorAngledOn", "Idle", SubResource( 18 ), "Idle", "FloorAngledOn", SubResource( 19 ), "Idle", "JumpOnUp", SubResource( 20 ), "Run", "JumpOnUp", SubResource( 21 ), "JumpOnUp", "JumpOnInvert", SubResource( 22 ), "JumpOnInvert", "JumpOnDown", SubResource( 23 ), "JumpOnDown", "JumpOnLand", SubResource( 24 ), "JumpOnLand", "Idle", SubResource( 25 ), "JumpOnLand", "Run", SubResource( 30 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 47.6399, 196.882 )
+graph_offset = Vector2( -79.1853, 232.372 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=27]
 

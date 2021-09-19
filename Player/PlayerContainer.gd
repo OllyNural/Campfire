@@ -10,13 +10,13 @@ export var MAX_SPEED: int = 32
 export var FRICTION: float = 0.2
 export var AIR_RESISTANCE: float = 0.02
 export var GRAVITY: int = 200
-export var JUMP_FORCE: float = 90.0
+export var JUMP_FORCE: float = 100.0
 
 var can_move = true setget set_can_move
 
 var invert_velocity = (JUMP_FORCE / 10)
 
-const MAX_JUMP_FORGIVENESS_TIME = 0.08
+const MAX_JUMP_FORGIVENESS_TIME = 0.01
 var jump_forgiveness_time: float = 0.0
 
 var jump_pressed_current: float = 0
@@ -89,7 +89,7 @@ func jump_state(delta):
 	
 	velocity = player.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
 	if (lantern_picked_up):
-		lantern.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
+		lantern.position = player.position + Vector2(0, -4)
 
 	if player.is_on_floor():
 		if (is_in_air):
@@ -118,8 +118,6 @@ func jump_state(delta):
 	
 		if (Input.is_action_pressed("ui_up")):
 			jump_forgiveness_time = MAX_JUMP_FORGIVENESS_TIME + 1
-
-		jump_forgiveness_time += delta
 	
 	if (input_x):
 		prev_input = input_x
@@ -130,7 +128,6 @@ func move_state(delta):
 	var flip
 
 	if (input_x != 0):
-		print(input_x)
 		velocity.x += input_x * ACCELERATION * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 		flip = input_x < 0
@@ -138,7 +135,6 @@ func move_state(delta):
 		if (lantern_picked_up):
 			lantern.move(flip)
 	else:
-		print(prev_input)
 		flip = prev_input < 0
 		player.idle(lantern_picked_up)
 		if (lantern_picked_up):
@@ -149,9 +145,11 @@ func move_state(delta):
 
 	# Jumping
 	if (player.is_on_floor() && jump_pressed_current > 0):
+		jump_forgiveness_time = 0.0
 		state = JUMP
 
-	if ((jump_forgiveness_time <= MAX_JUMP_FORGIVENESS_TIME) && Input.is_action_just_pressed("ui_up")):
+	if ((jump_forgiveness_time <= MAX_JUMP_FORGIVENESS_TIME) && jump_pressed_current > 0):
+		jump_forgiveness_time = 0.0
 		state = JUMP
 
 	if player.is_on_floor():
@@ -165,10 +163,12 @@ func move_state(delta):
 
 	velocity = player.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
 	if (lantern_picked_up):
-		lantern.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
+		lantern.position = player.position + Vector2(0, -4)
 
 	if (input_x):
 		prev_input = input_x
+	
+	jump_forgiveness_time += delta
 
 func get_direction() -> Vector2:
 	var input_vector = Vector2.ZERO
@@ -187,7 +187,7 @@ func _on_lantern_picked_up():
 			lantern.move(input_x < 0)
 		else:
 			lantern.move(velocity.x < 0)
-			
+
 func _on_lantern_toggle_state():
 	lantern.toggle_state()
 

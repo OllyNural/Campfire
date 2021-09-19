@@ -934,7 +934,6 @@ script = ExtResource( 26 )
 
 [node name="AmbientLighting" type="CanvasModulate" parent="."]
 process_priority = 2
-visible = false
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 8 )
 
@@ -1069,7 +1068,7 @@ scale = Vector2( -1, 1 )
 position = Vector2( 250, -355 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
-frame = 1
+frame = 0
 flip_h = true
 
 [node name="CabinOver" parent="YSort" instance=ExtResource( 18 )]
@@ -1120,7 +1119,6 @@ update_rotation = false
 
 [node name="Environment" type="Node2D" parent="."]
 pause_mode = 2
-visible = false
 material = SubResource( 117 )
 script = ExtResource( 9 )
 light_scale = 2

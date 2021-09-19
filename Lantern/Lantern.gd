@@ -3,9 +3,7 @@ extends KinematicBody2D
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var sprite = $Sprite
-
 onready var lightController = $LightController
-
 onready var fuelController = $FuelController
 
 var is_lit = true
@@ -47,7 +45,8 @@ func handle_dropped():
 	animationState.travel("FloorAngledOn")
 
 func handle_picked_up(position: Vector2):
-	self.global_position = position - Vector2(0, 4)
+#	pass
+	self.global_position = position + Vector2(0, -4)
 
 func flip(flip: bool):
 	if (flip):
