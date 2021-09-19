@@ -60,7 +60,6 @@ func _physics_process(delta):
 #			player.move(lantern_picked_up, velocity.x < 0)
 	
 func jump_state(delta):
-#	print('in jump state')
 	input_x = get_direction().x
 	jump_pressed_current -= delta
 
@@ -93,9 +92,7 @@ func jump_state(delta):
 		lantern.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
 
 	if player.is_on_floor():
-#		print('Jump - on floor: ', is_in_air)
 		if (is_in_air):
-#			print('running land animation')
 			# Start Player land animation
 			is_in_air = false
 			player.jump("Land", lantern_picked_up, flip, is_moving)
@@ -103,14 +100,11 @@ func jump_state(delta):
 				lantern.jump("Land", flip)
 			state = MOVE
 
-#		state = MOVE
-
 		if (input_x == 0):
 			velocity.x = lerp(prev_input, 0, FRICTION)
 
 	else:
 		is_in_air = true
-#		print('Jump - not on floor: ', is_in_air)
 
 		# Jump is going up
 		if (-JUMP_FORCE <= velocity.y && velocity.y < -invert_velocity):
@@ -131,12 +125,12 @@ func jump_state(delta):
 		prev_input = input_x
 
 func move_state(delta):
-#	print('move state')
 	input_x = get_direction().x
 	
 	var flip
 
 	if (input_x != 0):
+		print(input_x)
 		velocity.x += input_x * ACCELERATION * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 		flip = input_x < 0
@@ -144,6 +138,7 @@ func move_state(delta):
 		if (lantern_picked_up):
 			lantern.move(flip)
 	else:
+		print(prev_input)
 		flip = prev_input < 0
 		player.idle(lantern_picked_up)
 		if (lantern_picked_up):
@@ -160,23 +155,20 @@ func move_state(delta):
 		state = JUMP
 
 	if player.is_on_floor():
-#		print('player on floor')
 		jump_forgiveness_time = 0.0
 		if (input_x == 0):
 			velocity.x = lerp(velocity.x, 0, FRICTION)
 	else:
-#		print('player not on floor')
 		state = JUMP
-	
-#	print('Setting velocity using gravity and delta. velocity:', velocity.y, ', new velocity', (velocity.y + GRAVITY * delta))
-#	print('New state after changing: ', state)
+
 	velocity.y += GRAVITY * delta
 
 	velocity = player.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
 	if (lantern_picked_up):
 		lantern.move_and_slide_with_snap(velocity, Vector2.UP, FLOOR_NORMAL)
-	
-	prev_input = input_x
+
+	if (input_x):
+		prev_input = input_x
 
 func get_direction() -> Vector2:
 	var input_vector = Vector2.ZERO
