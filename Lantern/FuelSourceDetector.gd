@@ -15,13 +15,13 @@ func connect_listeners():
 		i.connect("in_light_range", self, "_on_light_in_light_range")
 		i.connect("out_light_range", self, "_on_light_out_light_range")
 
-func _on_light_in_light_range(area: Area2D, type: String):
+func _on_light_in_light_range(area: Area2D, type: String, _position: Vector2):
 	if (area.get_name() == 'FuelSourceDetector' && type != 'lantern'):
 		lightCount += 1
 		if (lightCount > 0):
 			emit_signal("in_any_light_range")
 
-func _on_light_out_light_range(area, type: String):
+func _on_light_out_light_range(area, type: String, _position: Vector2):
 	if (area.get_name() == 'FuelSourceDetector' && type != 'lantern'):
 		lightCount -= 1
 		if (lightCount < 1):

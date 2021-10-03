@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=2]
+[gd_scene load_steps=173 format=2]
 
 [ext_resource path="res://World/Stars.png" type="Texture" id=1]
 [ext_resource path="res://World/Environment/Snow.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://World/Lampost/Lampost.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Levels/GameStart.gd" type="Script" id=11]
 [ext_resource path="res://World/Foliage/Foliage2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Audio/background-wind-audio.wav" type="AudioStream" id=13]
+[ext_resource path="res://World/AudioStreamPlayerBackground.gd" type="Script" id=14]
 [ext_resource path="res://World/Foliage/Foliage4.tscn" type="PackedScene" id=16]
 [ext_resource path="res://World/Trees/Tree3.tscn" type="PackedScene" id=17]
 [ext_resource path="res://World/Trees/Tree2.tscn" type="PackedScene" id=18]
@@ -1117,6 +1119,7 @@ position = Vector2( -83, 152 )
 
 [node name="Lantern" parent="PlayerContainer" index="1"]
 position = Vector2( -56, 152 )
+is_starting_lit = true
 
 [node name="AmbientLighting" type="CanvasModulate" parent="."]
 pause_mode = 2
@@ -1160,7 +1163,12 @@ position = Vector2( -104, 8 )
 position = Vector2( -122, 8 )
 
 [node name="Lampost" parent="Objects" instance=ExtResource( 10 )]
-position = Vector2( 18, 8 )
+position = Vector2( 22, 8 )
+
+[node name="AudioStreamPlayerBackground" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+pitch_scale = 0.8
+script = ExtResource( 14 )
 
 [editable path="Camera2D"]
 [editable path="PlayerContainer"]

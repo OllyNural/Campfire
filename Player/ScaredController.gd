@@ -70,3 +70,7 @@ func _on_out_any_light_range():
 
 func set_can_move(move: bool):
 	can_move = move
+
+func reset_cold():
+	current_bar_value = MAX_BAR_VALUE
+	state = DECREASE

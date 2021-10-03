@@ -6,6 +6,10 @@ onready var lightSourceRange = $LightSourceRange
 
 func set_light_type(type):
 	lightSourceRange.set_light_type(type)
+#	if (type == 'lampost'):
+#		light2D.set_shadows(false)
+#	else:
+#		light2D.set_shadows(true)
 
 func set_texture_scale(scale):
 	light2D.set_texture_scale(scale)

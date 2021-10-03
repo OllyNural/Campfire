@@ -13,7 +13,7 @@ func is_colliding():
 	return areas.size() > 0
 
 func _on_LightSourceRange_area_entered(area):
-	emit_signal("in_light_range", area, light_type)
+	emit_signal("in_light_range", area, light_type, global_position)
 
 func _on_LightSourceRange_area_exited(area):
-	emit_signal("out_light_range", area, light_type)
+	emit_signal("out_light_range", area, light_type, global_position)

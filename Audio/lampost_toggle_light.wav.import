@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/lampost_toggle_light.wav-b9fa33b63735d3111b57ea5a54eca815.sample"
+
+[deps]
+
+source_file="res://Audio/lampost_toggle_light.wav"
+dest_files=[ "res://.import/lampost_toggle_light.wav-b9fa33b63735d3111b57ea5a54eca815.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

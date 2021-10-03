@@ -5,12 +5,15 @@ const GameStartScreen = preload("res://UI/GameStartScreen.tscn")
 onready var AmbientLighting = $AmbientLighting
 onready var playerContainer = $PlayerContainer
 
+onready var soundController = $"/root/SoundController"
+
 var game_start
 
 func _ready():
 	get_tree().paused = false
 	add_start_screen()
 	playerContainer.set_can_move(false)
+	soundController.set_piano('background', true)
 
 func add_start_screen():
 	game_start = GameStartScreen.instance()

@@ -4,13 +4,14 @@ onready var player = $Player
 onready var lantern = $Lantern
 
 signal cold_timeout_game_over
+signal recent_lightsource_checkpoint
 
 export var ACCELERATION: int = 256
 export var MAX_SPEED: int = 32
 export var FRICTION: float = 0.2
 export var AIR_RESISTANCE: float = 0.02
 export var GRAVITY: int = 200
-export var JUMP_FORCE: float = 100.0
+export var JUMP_FORCE: float = 105.0
 
 var can_move = true setget set_can_move
 
@@ -43,6 +44,7 @@ func _ready():
 	player.connect("lantern_picked_up", self, "_on_lantern_picked_up")
 	player.connect("lantern_toggle_state", self, "_on_lantern_toggle_state")
 	player.connect("cold_timeout_game_over", self, "_on_cold_timeout_game_over")
+	player.connect("recent_lightsource_checkpoint", self, "_on_recent_lightsource_checkpoint")
 
 func _physics_process(delta):
 	if !can_move:
@@ -194,11 +196,16 @@ func _on_lantern_toggle_state():
 func _on_cold_timeout_game_over():
 	emit_signal("cold_timeout_game_over")
 
+func _on_recent_lightsource_checkpoint(checkpoint_position: Vector2):
+	emit_signal("recent_lightsource_checkpoint", checkpoint_position)
+
 func startOpeningCutscene():
-	can_move = false
-#	Run Animation Player animation
-#	emit_signal("display_helper_controls")
 	can_move = true
+
+func reset_player(move_position: Vector2):
+	player.global_position = move_position
+	player.reset_cold()
+	_on_lantern_picked_up()
 
 func set_can_move(move: bool):
 	can_move = move

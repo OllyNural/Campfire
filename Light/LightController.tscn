@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Light/LightController.gd" type="Script" id=1]
 [ext_resource path="res://Light/Area2D.gd" type="Script" id=2]
 [ext_resource path="res://Lantern/light-shader-online-1.png" type="Texture" id=3]
 [ext_resource path="res://Lantern/Light2D.gd" type="Script" id=4]
-[ext_resource path="res://Lantern/shader-1.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -17,7 +16,7 @@ texture_scale = 0.2
 color = Color( 0.92549, 0.807843, 0.639216, 1 )
 energy = 0.158025
 shadow_enabled = true
-shadow_gradient_length = 30.0
+shadow_gradient_length = 15.0
 shadow_filter = 5
 shadow_filter_smooth = 18.3
 script = ExtResource( 4 )
@@ -27,10 +26,6 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="Light2D"]
-
-[node name="Light2D2" type="Light2D" parent="."]
-visible = false
-texture = ExtResource( 5 )
 
 [node name="LightSourceRange" type="Area2D" parent="." groups=[
 "LightSources",

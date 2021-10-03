@@ -6,6 +6,11 @@ onready var sprite = $Sprite
 onready var lightController = $LightController
 onready var fuelController = $FuelController
 
+onready var lanternToggleState = $LanternToggleState
+onready var lanternToggleLight = $LanternToggleLight
+
+export var is_starting_lit = false
+
 var is_lit = true
 var can_move = true setget set_can_move
 var has_fuel = true
@@ -18,7 +23,12 @@ func _ready():
 	lightController.set_flicker_amount(1)
 	lightController.set_collision_range(5)
 	lightController.set_light_type("lantern")
-	turn_off(0.1)
+	if (is_starting_lit):
+		is_lit = false
+		turn_on(0.1)
+	else:
+		is_lit = true
+		turn_off(0.1)
 	fuelController.connect("lantern_fuel_not_empty", self, "_on_lantern_fuel_not_empty")
 	fuelController.connect("lantern_fuel_empty", self, "_on_lantern_fuel_empty")
 
@@ -43,10 +53,11 @@ func jump(jump_state: String, flip: bool):
 func handle_dropped():
 	self.global_position = global_position + Vector2(0, 4)
 	animationState.travel("FloorAngledOn")
+	lanternToggleState.play()
 
 func handle_picked_up(position: Vector2):
-#	pass
 	self.global_position = position + Vector2(0, -4)
+	lanternToggleState.play()
 
 func flip(flip: bool):
 	if (flip):
@@ -61,19 +72,24 @@ func toggle_state(time: float = 0.2):
 		turn_off(time)
 	else:
 		turn_on(time)
+	lanternToggleLight.play()
 
 func turn_on(time: float = 0.2):
+#	print('is_lit: ', is_lit, ' - turning on')
 	if (!is_lit):
 		if (has_fuel):
 			fuelController.set_lantern_on()
 			lightController.fade_in(time)
-	is_lit = true
+			is_lit = true
+#			print('is_lit: ', is_lit, ' - turned on')
 
 func turn_off(time: float = 0.2):
+#	print('is_lit: ', is_lit, ' - turning off')
 	if (is_lit):
 		fuelController.set_lantern_off()
 		lightController.fade_out(time)
-	is_lit = false
+		is_lit = false
+#		print('is_lit: ', is_lit, ' - turned off')
 
 func _on_lantern_fuel_empty():
 	has_fuel = false

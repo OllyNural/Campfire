@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/Lampost/Lampost.png" type="Texture" id=1]
 [ext_resource path="res://World/Lampost/Lampost.gd" type="Script" id=2]
 [ext_resource path="res://Light/LightController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Audio/lampost_toggle_light.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Off"
@@ -40,8 +41,13 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 17.7704, 20.3861 )
 
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 23.7206
+height = 2.23635
+
 [node name="Lampost" type="Node2D" groups=[
 "LightSourceInstance",
+"ToolTipTrigger",
 ]]
 pause_mode = 2
 script = ExtResource( 2 )
@@ -68,5 +74,17 @@ collision_mask = 0
 position = Vector2( -4.34045, -20.3704 )
 shape = SubResource( 3 )
 
+[node name="ToolTipTrigger" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToolTipTrigger"]
+position = Vector2( -0.0985565, -16.3614 )
+shape = SubResource( 4 )
+
+[node name="LampostToggleLight" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="area_entered" from="ToolTipTrigger" to="." method="_on_ToolTipTrigger_area_entered"]

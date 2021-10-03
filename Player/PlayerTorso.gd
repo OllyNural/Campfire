@@ -5,8 +5,9 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var sprite = $Sprite
 
-#func _process(delta):
-#	print(animationState.get_current_node())
+onready var snowStep1 = $SnowStep1
+onready var snowStep2 = $SnowStep2
+onready var snowLand = $SnowLand
 
 func set_active(state: bool) -> void:
 	animationTree.active = state
@@ -34,3 +35,12 @@ func flip_h(flip: bool):
 
 func play(animation: String):
 	animationPlayer.play(animation)
+
+func on_snow_step_1():
+	snowStep1.play()
+
+func on_snow_step_2():
+	snowStep2.play()
+
+func on_snow_land():
+	snowLand.play()

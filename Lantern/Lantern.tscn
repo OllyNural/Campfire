@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Lantern/Lantern.png" type="Texture" id=1]
 [ext_resource path="res://UI/Fuelbar-large-background.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Lantern/FuelController.gd" type="Script" id=6]
 [ext_resource path="res://Light/LightController.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Lantern/FuelSourceDetector.gd" type="Script" id=8]
+[ext_resource path="res://Audio/lantern_toggle_state.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/lantern_toggle_light.wav" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "FloorAngledOn"
@@ -333,11 +335,11 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=26]
+[sub_resource type="AnimationNodeStateMachine" id=27]
 states/FloorAngledOn/node = SubResource( 9 )
 states/FloorAngledOn/position = Vector2( 98, 221.75 )
 states/Idle/node = SubResource( 10 )
@@ -352,15 +354,15 @@ states/JumpOnUp/node = SubResource( 14 )
 states/JumpOnUp/position = Vector2( 175.14, 337.075 )
 states/Run/node = SubResource( 15 )
 states/Run/position = Vector2( 536, 221.875 )
-transitions = [ "Idle", "Run", SubResource( 16 ), "Run", "Idle", SubResource( 17 ), "FloorAngledOn", "Idle", SubResource( 18 ), "Idle", "FloorAngledOn", SubResource( 19 ), "Idle", "JumpOnUp", SubResource( 20 ), "Run", "JumpOnUp", SubResource( 21 ), "JumpOnUp", "JumpOnInvert", SubResource( 22 ), "JumpOnInvert", "JumpOnDown", SubResource( 23 ), "JumpOnDown", "JumpOnLand", SubResource( 24 ), "JumpOnLand", "Idle", SubResource( 25 ), "JumpOnLand", "Run", SubResource( 30 ) ]
+transitions = [ "Idle", "Run", SubResource( 16 ), "Run", "Idle", SubResource( 17 ), "FloorAngledOn", "Idle", SubResource( 18 ), "Idle", "FloorAngledOn", SubResource( 19 ), "Idle", "JumpOnUp", SubResource( 20 ), "Run", "JumpOnUp", SubResource( 21 ), "JumpOnUp", "JumpOnInvert", SubResource( 22 ), "JumpOnInvert", "JumpOnDown", SubResource( 23 ), "JumpOnDown", "JumpOnLand", SubResource( 24 ), "JumpOnLand", "Idle", SubResource( 25 ), "JumpOnLand", "Run", SubResource( 26 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -79.1853, 232.372 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
 
-[sub_resource type="CircleShape2D" id=28]
+[sub_resource type="CircleShape2D" id=29]
 
-[sub_resource type="CapsuleShape2D" id=29]
+[sub_resource type="CapsuleShape2D" id=30]
 radius = 4.07874
 height = 6.9018
 
@@ -387,18 +389,19 @@ anims/JumpOnUp = SubResource( 7 )
 anims/RunOn = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 26 )
+tree_root = SubResource( 27 )
 anim_player = NodePath("../MovementPlayer")
 active = true
-parameters/playback = SubResource( 27 )
+parameters/playback = SubResource( 28 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="LanternPickUpRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 64
 collision_mask = 0
 
-[node name="PickUpRange" type="CollisionShape2D" parent="Area2D"]
+[node name="PickUpRange" type="CollisionShape2D" parent="LanternPickUpRange"]
 visible = false
-shape = SubResource( 28 )
+shape = SubResource( 29 )
 
 [node name="LightController" parent="." instance=ExtResource( 7 )]
 
@@ -411,9 +414,8 @@ collision_mask = 128
 script = ExtResource( 8 )
 
 [node name="LightRangeCollision" type="CollisionShape2D" parent="FuelController/FuelSourceDetector"]
-visible = false
 position = Vector2( 0, -2 )
-shape = SubResource( 29 )
+shape = SubResource( 30 )
 
 [node name="FuelBar" type="CanvasLayer" parent="FuelController"]
 
@@ -446,4 +448,11 @@ position = Vector2( 19, 140 )
 texture = ExtResource( 5 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="FuelController/FuelBar"]
-color = Color( 1, 1, 1, 0.784314 )
+color = Color( 0.756863, 0.721569, 0.658824, 0.784314 )
+
+[node name="LanternToggleState" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="LanternToggleLight" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -1.0

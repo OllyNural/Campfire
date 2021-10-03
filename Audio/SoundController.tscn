@@ -1,0 +1,88 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Audio/SoundController.gd" type="Script" id=1]
+[ext_resource path="res://Audio/background-wind-audio.wav" type="AudioStream" id=2]
+[ext_resource path="res://World/AudioStreamPlayerBackground.gd" type="Script" id=3]
+[ext_resource path="res://Audio/PianoController.gd" type="Script" id=4]
+[ext_resource path="res://Audio/Piano/piano_clip_1.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/Piano/piano_clip_2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/Piano/piano_clip_10.wav" type="AudioStream" id=7]
+[ext_resource path="res://Audio/Piano/piano_clip_9.wav" type="AudioStream" id=8]
+[ext_resource path="res://Audio/Piano/piano_clip_13.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/Piano/piano_clip_4.wav" type="AudioStream" id=10]
+[ext_resource path="res://Audio/Piano/piano_clip_7.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/Piano/piano_clip_3.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/Piano/piano_clip_6.wav" type="AudioStream" id=13]
+[ext_resource path="res://Audio/Piano/piano_clip_5.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio/Piano/piano_clip_14.wav" type="AudioStream" id=15]
+[ext_resource path="res://Audio/Piano/piano_clip_12.wav" type="AudioStream" id=16]
+[ext_resource path="res://Audio/Piano/piano_clip_8.wav" type="AudioStream" id=17]
+[ext_resource path="res://Audio/Piano/piano_clip_11.wav" type="AudioStream" id=18]
+
+[node name="SoundController" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="AudioStreamPlayerBackground" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+pitch_scale = 0.8
+script = ExtResource( 3 )
+
+[node name="PianoController" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="PianoClip1" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 5 )
+volume_db = -5.0
+
+[node name="PianoClip2" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 6 )
+volume_db = -5.0
+
+[node name="PianoClip3" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 12 )
+volume_db = -5.0
+
+[node name="PianoClip4" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 10 )
+volume_db = -5.0
+
+[node name="PianoClip5" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 14 )
+volume_db = -5.0
+
+[node name="PianoClip6" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 13 )
+volume_db = -5.0
+
+[node name="PianoClip7" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+
+[node name="PianoClip8" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 17 )
+volume_db = -5.0
+
+[node name="PianoClip9" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 8 )
+volume_db = -5.0
+
+[node name="PianoClip10" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 7 )
+volume_db = -5.0
+
+[node name="PianoClip11" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 18 )
+volume_db = -5.0
+
+[node name="PianoClip12" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 16 )
+volume_db = -5.0
+
+[node name="PianoClip13" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 9 )
+volume_db = -5.0
+
+[node name="PianoClip14" type="AudioStreamPlayer" parent="PianoController"]
+stream = ExtResource( 15 )
+volume_db = -5.0

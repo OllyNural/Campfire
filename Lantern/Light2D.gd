@@ -11,7 +11,6 @@ var base_energy = 0.9
 var flicker_amount = 1
 
 func _ready():
-#	yield(get_tree().create_timer(0.02), "timeout")
 	self.scale = Vector2(1, 1)
 	noise.seed = randi() % MAX_VALUE
 	noise.period = 16
@@ -25,14 +24,15 @@ func set_light_intensity(energy):
 func set_flicker_amount(amount):
 	flicker_amount = amount
 
+func set_shadows(is_shadow):
+	shadow_enabled = is_shadow
+
 func fade_in(time):
-#	print('fading in: ', self.energy, base_energy)
 	Tween.interpolate_property(self, "energy", self.energy, base_energy, time, 0, Tween.EASE_IN)
 	Tween.start()
 	yield(Tween, "tween_all_completed")
 
 func fade_out(time):
-#	print('fading off: ', self.energy, 0)
 	Tween.interpolate_property(self, "energy", self.energy, 0, time, 0, Tween.EASE_OUT)
 	Tween.start()
 	yield(Tween, "tween_all_completed")

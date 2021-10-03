@@ -3,6 +3,10 @@ extends Node2D
 onready var animationPlayer = $LightingAnimationPlayer
 onready var lightController = $LightController
 
+onready var lampostToggleLight = $LampostToggleLight
+
+signal trigger_tooltip
+
 var isPlayerInRange: bool = false
 var is_lampost_on: bool = false
 
@@ -14,10 +18,10 @@ func _ready():
 		turn_on()
 	else:
 		turn_off()
-	lightController.set_texture_scale(1.5)
+	lightController.set_texture_scale(1)
 	lightController.set_light_intensity(1)
 	lightController.set_flicker_amount(2)
-	lightController.set_collision_range(7)
+	lightController.set_collision_range(8)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_lampost_toggle") && isPlayerInRange:
@@ -30,6 +34,7 @@ func toggle_state(time: float = 0.2):
 	else:
 		is_lampost_on = true
 		turn_on(time)
+		lampostToggleLight.play()
 
 func turn_on(time: float = 0.2):
 	is_lampost_on = true
@@ -46,3 +51,6 @@ func _on_Area2D_area_entered(_area):
 
 func _on_Area2D_area_exited(_area):
 	isPlayerInRange = false
+
+func _on_ToolTipTrigger_area_entered(_area):
+	emit_signal('trigger_tooltip', 'lampost')

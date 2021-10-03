@@ -12,11 +12,13 @@ var gameOver
 
 var isPaused
 var isGameOver = false
+var recent_lightsource_checkpoint
 
 func _ready():
 	get_tree().paused = false
 	AmbientLighting.light_scale = AmbientLighting.LIGHT_SCALES.BLACK
 	PlayerContainer.connect("cold_timeout_game_over", self, "_on_player_loss")
+	PlayerContainer.connect("recent_lightsource_checkpoint", self, "_on_recent_lightsource_checkpoint")
 	PlayerContainer.startOpeningCutscene()
 
 func _process(delta):
@@ -49,6 +51,7 @@ func _on_player_loss():
 	get_tree().paused = true
 	gameOver.connect("game_start", self, "_on_game_start", [gameOver])
 	gameOver.connect("world_start", self, "_on_world_start", [gameOver])
+	gameOver.connect("continue_from_recent_checkpoint", self, "_on_continue_from_recent_checkpoint", [gameOver])
 
 func _on_game_start(menuNode: Node):
 	for i in get_tree().get_nodes_in_group("LightSourceInstance"):
@@ -66,3 +69,13 @@ func _on_world_start(menuNode: Node):
 	yield(get_tree().create_timer(1.5), "timeout")
 	get_tree().change_scene("res://World/World.tscn")
 
+func _on_continue_from_recent_checkpoint(menuNode: Node):
+	yield(menuNode.fade_out(), "completed")
+	PlayerContainer.reset_player(recent_lightsource_checkpoint)
+#	yield(get_tree().create_timer(1.5), "timeout")
+	get_tree().paused = false 
+#	yield(menuNode.fade_in(), "completed"
+	isGameOver = false
+
+func _on_recent_lightsource_checkpoint(checkpoint_position: Vector2):
+	recent_lightsource_checkpoint = checkpoint_position

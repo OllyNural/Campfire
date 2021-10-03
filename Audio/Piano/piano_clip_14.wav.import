@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/piano_clip_14.wav-3bd9f7c1838876b7605c7170c8463d1e.sample"
+
+[deps]
+
+source_file="res://Audio/Piano/piano_clip_14.wav"
+dest_files=[ "res://.import/piano_clip_14.wav-3bd9f7c1838876b7605c7170c8463d1e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
