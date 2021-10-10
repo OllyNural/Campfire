@@ -16,7 +16,12 @@ func animate_idle() -> void:
 	animationState.travel("Idle")
 
 func animate_move() -> void:
+#	print('Moving body')
 	animationState.travel("Run")
+
+func animate_sitting() -> void:
+	print('body animate_sitting')
+	animationState.travel("Sitting");
 
 func animate_jump(jump_state, is_moving) -> void:
 	match jump_state:

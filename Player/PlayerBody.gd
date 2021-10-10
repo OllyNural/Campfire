@@ -19,6 +19,11 @@ func animate_jump(jump_state: String, lantern_picked_up: bool, is_moving: bool):
 	player_torso.animate_jump(jump_state, is_moving)
 	player_hand.animate_jump(jump_state, lantern_picked_up, is_moving)
 
+func animate_sitting():
+	print('animate_sitting')
+	player_torso.animate_sitting()
+	player_hand.animate_sitting()
+
 func flip_h(flip: bool):
 	player_torso.flip_h(flip)
 	player_hand.flip_h(flip)

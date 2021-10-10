@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/PlayerContainer.gd" type="Script" id=1]
+[ext_resource path="res://Player/CutsceneManager.gd" type="Script" id=2]
 [ext_resource path="res://Lantern/Lantern.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
 
@@ -13,3 +14,6 @@ collision/safe_margin = 0.01
 
 [node name="Lantern" parent="." instance=ExtResource( 3 )]
 position = Vector2( -72, 145 )
+
+[node name="CutsceneManager" type="Node" parent="."]
+script = ExtResource( 2 )

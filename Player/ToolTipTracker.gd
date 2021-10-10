@@ -6,7 +6,8 @@ var objects = {
 	'lantern': false,
 	'lampost': false,
 	'locked_door': false,
-	'key': false
+	'key': false,
+	'end_game': false,
 }
 
 func _ready():
@@ -16,10 +17,10 @@ func _ready():
 func display_tooltip(type: String, duration: int):
 	emit_signal('show_tooltip', type, duration)
 
-func _on_tooltip_trigger(type):
+func _on_tooltip_trigger(type, duration = 1):
 	if (objects[type]):
 		return
 
-	display_tooltip(type, 1)
+	display_tooltip(type, duration)
 	objects[type] = true
 	

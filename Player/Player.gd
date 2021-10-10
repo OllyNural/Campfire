@@ -62,3 +62,12 @@ func set_can_move(move: bool):
 
 func reset_cold():
 	scaredController.reset_cold()
+
+func set_animate_sitting():
+	playerBody.animate_sitting()
+
+func set_ui_toggle(value: bool):
+	itemDetector.set_ui_toggle(value)
+
+func toggle_lantern():
+	itemDetector.toggle_lantern()

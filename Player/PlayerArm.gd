@@ -20,6 +20,10 @@ func animate_move(lantern_picked_up: bool) -> void:
 	else:
 		animationState.travel("Run")
 
+func animate_sitting() -> void:
+	print('arm animate_sitting')
+	animationState.travel("Sitting");
+
 func animate_jump(jump_state, lantern_picked_up, is_moving) -> void:
 	match jump_state:
 		"JumpUp":

@@ -32,13 +32,19 @@ var lantern_picked_up: bool = false
 enum {
 	MOVE,
 	JUMP,
-	STOPPED
+	STOPPED,
+	SITTING
 }
 
 var state = MOVE
 var velocity = Vector2.ZERO
 var input_x
 var prev_input = 0
+
+var move_right: float = 0;
+var move_left: float = 0;
+var move_jump: bool = false;
+var action_ui_drop: bool = false;
 
 func _ready():
 	player.connect("lantern_picked_up", self, "_on_lantern_picked_up")
@@ -47,10 +53,10 @@ func _ready():
 	player.connect("recent_lightsource_checkpoint", self, "_on_recent_lightsource_checkpoint")
 
 func _physics_process(delta):
-	if !can_move:
-		return
+	if can_move:
+		handle_inputs();
 
-	if Input.is_action_just_pressed("ui_drop") && lantern_picked_up && player.is_on_floor():
+	if action_ui_drop && lantern_picked_up && player.is_on_floor():
 		drop_lantern()
 		
 	match state:
@@ -58,9 +64,12 @@ func _physics_process(delta):
 			move_state(delta)
 		JUMP:
 			jump_state(delta)
-#		STOPPED:
-#			player.move(lantern_picked_up, velocity.x < 0)
-	
+		SITTING:
+			pass
+
+func set_state_sitting():
+	state = SITTING
+
 func jump_state(delta):
 	input_x = get_direction().x
 	jump_pressed_current -= delta
@@ -78,12 +87,13 @@ func jump_state(delta):
 		is_moving = false
 		flip = prev_input < 0
 
+#	print('is moving', is_moving)
 	velocity.y += GRAVITY * delta
 
-	if (Input.is_action_just_pressed("ui_up")):
+	if (move_jump):
 		jump_pressed_current = jump_pressed_remember_time
 
-	if ((player.is_on_floor() && jump_pressed_current > 0) || (jump_forgiveness_time <= MAX_JUMP_FORGIVENESS_TIME) && Input.is_action_just_pressed("ui_up")):
+	if ((player.is_on_floor() && jump_pressed_current > 0) || (jump_forgiveness_time <= MAX_JUMP_FORGIVENESS_TIME) && move_jump):
 		player.jump("JumpUp", lantern_picked_up, flip, is_moving)
 		if (lantern_picked_up):
 			lantern.jump("JumpUp", flip)
@@ -118,7 +128,7 @@ func jump_state(delta):
 			if (lantern_picked_up):
 				lantern.jump("JumpDown", flip)
 	
-		if (Input.is_action_pressed("ui_up")):
+		if (move_jump):
 			jump_forgiveness_time = MAX_JUMP_FORGIVENESS_TIME + 1
 	
 	if (input_x):
@@ -142,7 +152,7 @@ func move_state(delta):
 		if (lantern_picked_up):
 			lantern.idle(flip)
 	
-	if (Input.is_action_just_pressed("ui_up")):
+	if (move_jump):
 		jump_pressed_current = jump_pressed_remember_time
 
 	# Jumping
@@ -172,9 +182,31 @@ func move_state(delta):
 	
 	jump_forgiveness_time += delta
 
+func handle_inputs():
+	set_move_right(Input.get_action_strength("ui_right"))
+	set_move_left(Input.get_action_strength("ui_left"))
+	set_move_jump(Input.is_action_just_pressed("ui_up"))
+	player.set_ui_toggle(Input.is_action_just_pressed("ui_toggle"))
+#	set_action_ui_drop(Input.is_action_just_pressed("ui_drop"))
+
+func set_move_right(value: float):
+	move_right = value;
+
+func set_move_left(value: float):
+	move_left = value;
+
+func set_move_jump(value: bool):
+	move_jump = value;
+
+func set_action_ui_drop(value: bool):
+	action_ui_drop = value;
+
+func toggle_lantern():
+	player.toggle_lantern()
+
 func get_direction() -> Vector2:
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_vector.x = move_right - move_left
 	return input_vector
 
 func drop_lantern():
@@ -211,4 +243,8 @@ func set_can_move(move: bool):
 	can_move = move
 	player.set_can_move(move)
 	lantern.set_can_move(move)
-	
+
+func set_sitting():
+	print('set_sitting')
+	player.set_animate_sitting()
+

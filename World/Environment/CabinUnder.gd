@@ -9,11 +9,12 @@ signal trigger_tooltip
 func _ready():
 	for i in get_tree().get_nodes_in_group("Player"):
 		i.connect("key_picked_up", self, "_on_key_picked_up")
-	door_front.set_deferred("disabled", true)
-	door_back.set_deferred("disabled", true)
-	tooltip_trigger.set_deferred("disabled", true)
+	door_front.set_deferred("disabled", false)
+	door_back.set_deferred("disabled", false)
+	tooltip_trigger.set_deferred("disabled", false)
 
 func _on_key_picked_up():
+	print('key picked up')
 	door_front.set_deferred("disabled", true)
 	door_back.set_deferred("disabled", true)
 	tooltip_trigger.set_deferred("disabled", true)

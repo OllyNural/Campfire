@@ -49,7 +49,7 @@ func _process(delta):
 			current_bar_value = max(current_bar_value, 0)
 			if (current_bar_value == 0):
 				state = STOPPED
-				emit_signal("cold_timeout_game_over")
+#				emit_signal("cold_timeout_game_over")
 			textureProgress.value = current_bar_value
 		PAUSE:
 			pass
