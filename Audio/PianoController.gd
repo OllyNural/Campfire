@@ -47,7 +47,7 @@ func _process(delta):
 	if (is_background_piano):
 		if (!current_playing || current_playing.playing == false):
 			pass
-#			play_piano()
+			play_piano()
 
 func play_background_piano(is_play: bool):
 	is_background_piano = is_play

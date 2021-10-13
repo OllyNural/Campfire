@@ -2,7 +2,7 @@ extends Sprite
 
 onready var door_front = $CollisionsArea2D/DoorFront
 onready var door_back = $CollisionsArea2D/DoorBack
-onready var tooltip_trigger = $TooltipArea2D/CollisionShape2D
+onready var tooltip_trigger = $TooltipKeyArea2D/CollisionShape2D
 
 signal trigger_tooltip
 
@@ -14,10 +14,12 @@ func _ready():
 	tooltip_trigger.set_deferred("disabled", false)
 
 func _on_key_picked_up():
-	print('key picked up')
 	door_front.set_deferred("disabled", true)
 	door_back.set_deferred("disabled", true)
 	tooltip_trigger.set_deferred("disabled", true)
 
 func _on_TooltipArea2D_area_entered(_area):
 	emit_signal('trigger_tooltip', 'locked_door')
+
+func _on_Area2D_area_entered(area):
+	emit_signal('trigger_tooltip', 'cabin_note')

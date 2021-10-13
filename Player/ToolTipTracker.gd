@@ -8,6 +8,7 @@ var objects = {
 	'locked_door': false,
 	'key': false,
 	'end_game': false,
+	'cabin_note': false,
 }
 
 func _ready():

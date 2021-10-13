@@ -6,6 +6,7 @@ var lampost_text = "Press M to toggle the Lampost light"
 var lantern_text_array = ["Press J to pick up the lantern", "Press L to toggle the lantern light"]
 var locked_door_text = "The door is locked"
 var picked_up_key_text = "You picked up a key"
+var cabin_note_text = "I'm heading back to the campsite, don't be too long xx"
 var end_game_text = [
 	{ 'text': "Hello?", 'font_color': 'ffffff' },
 	{ 'text': "You're back! Thank goodness", 'font_color': 'dddddd' },
@@ -43,6 +44,11 @@ func show_tooltip(type, duration):
 			yield(canvasModulate.fade_out(fade_duration), "completed")
 		"key":
 			tooltip.text = picked_up_key_text
+			yield(canvasModulate.fade_in(fade_duration), "completed")
+			yield(get_tree().create_timer(duration), "timeout")
+			yield(canvasModulate.fade_out(fade_duration), "completed")
+		"cabin_note":
+			tooltip.text = cabin_note_text
 			yield(canvasModulate.fade_in(fade_duration), "completed")
 			yield(get_tree().create_timer(duration), "timeout")
 			yield(canvasModulate.fade_out(fade_duration), "completed")

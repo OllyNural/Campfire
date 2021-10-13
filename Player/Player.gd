@@ -50,6 +50,7 @@ func _on_recent_lightsource_checkpoint(checkpoint_position: Vector2):
 
 func _on_key_picked_up():
 	if (!has_key):
+		has_key = true
 		keyPickUp.play()
 		emit_signal("key_picked_up")
 
